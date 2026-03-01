@@ -1,7 +1,11 @@
-import { topVideos } from "@/lib/mock-data";
+import { AccountData } from "@/lib/mock-data";
 import { Eye, Heart, MessageCircle, CalendarIcon, Repeat2 } from "lucide-react";
 
-export default function TopVideos() {
+type Props = {
+    videos: AccountData["topVideos"];
+};
+
+export default function TopVideos({ videos }: Props) {
     const getBadgeStyle = (tag: string) => {
         switch (tag) {
             case "STORYTELLING":
@@ -53,7 +57,7 @@ export default function TopVideos() {
 
             {/* Video List */}
             <div className="w-full flex flex-col space-y-4">
-                {topVideos.map((video) => (
+                {videos.map((video) => (
                     <div
                         key={video.id}
                         className="flex items-center bg-[#1e1e1e]/60 border border-white/5 rounded-[20px] p-5 w-full"

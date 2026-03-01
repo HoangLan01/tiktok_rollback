@@ -4,7 +4,11 @@ import { useState } from "react";
 import { Search, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function TikTokSearch() {
+type Props = {
+    onSearch: (query: string) => void;
+};
+
+export default function TikTokSearch({ onSearch }: Props) {
     const [query, setQuery] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +21,8 @@ export default function TikTokSearch() {
         // Simulate API fetch delay
         setTimeout(() => {
             setIsLoading(false);
-        }, 3000);
+            onSearch(query);
+        }, 2000); // reduced from 3s to 2s for better UX
     };
 
     return (
@@ -31,8 +36,8 @@ export default function TikTokSearch() {
                 <form
                     onSubmit={handleSearch}
                     className={`flex items-center w-full bg-white/5 backdrop-blur-xl border rounded-full transition-all duration-300 overflow-hidden ${isFocused
-                            ? "border-[#22C55E] shadow-[0_0_20px_rgba(34,197,94,0.3)] bg-white/10"
-                            : "border-white/10 hover:border-white/30"
+                        ? "border-[#22C55E] shadow-[0_0_20px_rgba(34,197,94,0.3)] bg-white/10"
+                        : "border-white/10 hover:border-white/30"
                         }`}
                 >
                     <div className="pl-6 pr-3 py-4 flex items-center justify-center pointer-events-none">
@@ -62,8 +67,8 @@ export default function TikTokSearch() {
                             type="submit"
                             disabled={isLoading || !query.trim()}
                             className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${isLoading || !query.trim()
-                                    ? "bg-white/10 text-slate-400 cursor-not-allowed"
-                                    : "bg-gradient-to-r from-[#22C55E] to-emerald-400 text-white shadow-lg hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]"
+                                ? "bg-white/10 text-slate-400 cursor-not-allowed"
+                                : "bg-gradient-to-r from-[#22C55E] to-emerald-400 text-white shadow-lg hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]"
                                 }`}
                         >
                             Phân tích

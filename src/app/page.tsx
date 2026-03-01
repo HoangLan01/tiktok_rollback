@@ -5,9 +5,29 @@ import HeroStats from "@/components/HeroStats";
 import BrandAnalysis from "@/components/BrandAnalysis";
 import TopVideos from "@/components/TopVideos";
 import TikTokSearch from "@/components/TikTokSearch";
+import { accountsData } from "@/lib/mock-data";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
+  const [currentAccount, setCurrentAccount] = useState("vietchop");
+
+  const handleSearch = (query: string) => {
+    // Basic lookup logic based on text match
+    const lowerQuery = query.toLowerCase();
+    if (lowerQuery.includes("blossominn")) {
+      setCurrentAccount("blossominn");
+    } else if (lowerQuery.includes("vietchop") || lowerQuery.includes("chú tùng")) {
+      setCurrentAccount("vietchop");
+    } else {
+      // If none match, you either show alert or default to one
+      // For this spec, we will default nicely to blossominn if "bloss" is typed, else do nothing to keep current view
+      if (lowerQuery.includes("bloss")) {
+        setCurrentAccount("blossominn");
+      }
+    }
+  };
+
+  const currentData = accountsData[currentAccount];
 
   return (
     <main className="min-h-screen bg-[#111111] text-white flex flex-col items-center overflow-x-hidden relative">
@@ -58,7 +78,7 @@ export default function Home() {
       </div>
 
       {/* Search Bar */}
-      <TikTokSearch />
+      <TikTokSearch onSearch={handleSearch} />
 
       {/* Navigation Tabs */}
       <nav className="w-full max-w-xl mx-auto flex justify-center space-x-2 mt-4 z-10 sticky top-4">
@@ -95,9 +115,9 @@ export default function Home() {
 
       {/* Tab Content Rendering */}
       <div className="w-full relative z-10 mt-6 flex-1 flex flex-col animate-in fade-in duration-500">
-        {activeTab === "home" && <HeroStats />}
-        {activeTab === "dashboard" && <BrandAnalysis />}
-        {activeTab === "hall_of_fame" && <TopVideos />}
+        {activeTab === "home" && <HeroStats stats={currentData.channelStats} />}
+        {activeTab === "dashboard" && <BrandAnalysis data={currentData.brandAnalysis} config={currentData.analysisConfig} />}
+        {activeTab === "hall_of_fame" && <TopVideos videos={currentData.topVideos} />}
       </div>
     </main>
   );

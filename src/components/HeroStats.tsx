@@ -1,16 +1,20 @@
 import { Heart, Share2, MessageCircle, Bookmark, PlayCircle } from "lucide-react";
-import { channelStats } from "@/lib/mock-data";
+import { AccountData } from "@/lib/mock-data";
 
-export default function HeroStats() {
+type Props = {
+    stats: AccountData["channelStats"];
+};
+
+export default function HeroStats({ stats }: Props) {
     return (
         <div className="flex flex-col items-center justify-center p-6 bg-transparent min-h-[500px] text-white space-y-12">
             {/* Title / Hero stat */}
             <div className="text-center flex flex-col items-center">
                 <h1 className="text-6xl md:text-8xl font-black tracking-tighter bg-gradient-to-r from-orange-500 from-10% via-yellow-400 via-30% to-green-500 to-90% text-transparent bg-clip-text drop-shadow-md">
-                    {channelStats.totalViews}
+                    {stats.totalViews}
                 </h1>
                 <p className="text-slate-400 mt-2 text-lg font-light tracking-wide">
-                    lượt xem trong 12 tháng
+                    {stats.titleTagline}
                 </p>
             </div>
 
@@ -19,7 +23,7 @@ export default function HeroStats() {
                 {/* Likes */}
                 <div className="flex flex-col items-center space-y-1">
                     <span className="text-3xl md:text-4xl font-bold text-rose-500 tracking-wide">
-                        {channelStats.likes}
+                        {stats.likes}
                     </span>
                     <div className="flex items-center space-x-1.5 text-slate-500">
                         {/* We wouldn't render the icon in exact text area in original design but below it or together with label */}
@@ -32,7 +36,7 @@ export default function HeroStats() {
                 {/* Shares */}
                 <div className="flex flex-col items-center space-y-1">
                     <span className="text-3xl md:text-4xl font-bold text-cyan-400 tracking-wide">
-                        {channelStats.shares}
+                        {stats.shares}
                     </span>
                     <div className="flex items-center space-x-1.5 text-slate-500">
                         <span className="text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-1">
@@ -44,7 +48,7 @@ export default function HeroStats() {
                 {/* Comments */}
                 <div className="flex flex-col items-center space-y-1">
                     <span className="text-3xl md:text-4xl font-bold text-amber-500 tracking-wide">
-                        {channelStats.comments}
+                        {stats.comments}
                     </span>
                     <div className="flex items-center space-x-1.5 text-slate-500">
                         <span className="text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-1">
@@ -59,7 +63,7 @@ export default function HeroStats() {
                 {/* Saves */}
                 <div className="flex flex-col items-center space-y-1">
                     <span className="text-3xl md:text-4xl font-bold text-purple-400 tracking-wide">
-                        {channelStats.saves}
+                        {stats.saves}
                     </span>
                     <div className="flex items-center space-x-1.5 text-slate-500">
                         <span className="text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-1">
@@ -71,7 +75,7 @@ export default function HeroStats() {
                 {/* Videos */}
                 <div className="flex flex-col items-center space-y-1">
                     <span className="text-3xl md:text-4xl font-bold text-emerald-400 tracking-wide">
-                        {channelStats.totalVideos}
+                        {stats.totalVideos}
                     </span>
                     <div className="flex items-center space-x-1.5 text-slate-500">
                         <span className="text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-1">
