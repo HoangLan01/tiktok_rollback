@@ -19,6 +19,11 @@ export type AccountData = {
         highlightWord: string;
         description: string;
     };
+    peakTimeAnalysis: {
+        bestHour: string;
+        avgViewsInPeak: string;
+        insight: string;
+    };
     topVideos: {
         id: string;
         title: string;
@@ -60,6 +65,11 @@ export const accountsData: Record<string, AccountData> = {
             highlightWord: "thương hiệu",
             description: `Lynk & Co chỉ có 8 video nhưng avg 410K — cao gấp 2.4× VinFast (87 video, 168K avg). 
 Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây tranh cãi" luôn tạo engagement mạnh hơn xe phổ thông.`
+        },
+        peakTimeAnalysis: {
+            bestHour: "20:00 - 21:00",
+            avgViewsInPeak: "1.2M",
+            insight: "Đăng tải video vào khung giờ tối cuối tuần (thứ 7, CN) giúp đẩy luồng traffic xe cộ lên đỉnh điểm. Video đăng lúc 20h thường có khả năng viral (lên xu hướng) cao gấp 2.5 lần."
         },
         topVideos: [
             {
@@ -143,6 +153,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
             title: "Top Hashtags",
             highlightWord: "hashtags",
             description: `#uk và #lifestyle đang mang lại lượng views khổng lồ nhất (lên đến hơn 41.3K avg view). Mặc dù #fyp được sử dụng nhiều nhất (11 videos) nhưng mức độ engagement trung bình lại thua xa các tag đặc tả đời sống du học sinh.`
+        },
+        peakTimeAnalysis: {
+            bestHour: "10:00 - 11:00",
+            avgViewsInPeak: "21.1K",
+            insight: "Video có view cao nhất (41.3K) được đăng vào lúc 10:58 sáng. Các video đăng vào khung giờ trưa (12:00 - 13:00) hoặc sáng có xu hướng thu hút lượng view tự nhiên tốt hơn."
         },
         topVideos: [
             {

@@ -116,7 +116,7 @@ export default function Home() {
       {/* Tab Content Rendering */}
       <div className="w-full relative z-10 mt-6 flex-1 flex flex-col animate-in fade-in duration-500">
         {activeTab === "home" && <HeroStats stats={currentData.channelStats} />}
-        {activeTab === "dashboard" && <BrandAnalysis data={currentData.brandAnalysis} config={currentData.analysisConfig} />}
+        {activeTab === "dashboard" && <BrandAnalysis data={currentData.brandAnalysis} config={currentData.analysisConfig} peakTime={currentData.peakTimeAnalysis} />}
         {activeTab === "hall_of_fame" && <TopVideos videos={currentData.topVideos} />}
       </div>
     </main>

@@ -1,4 +1,5 @@
 import { AccountData } from "@/lib/mock-data";
+import { Clock } from "lucide-react";
 
 const brandColors: Record<string, string> = {
     "VinFast": "bg-[#2dd4bf]",
@@ -22,9 +23,10 @@ const brandColors: Record<string, string> = {
 type Props = {
     data: AccountData["brandAnalysis"];
     config: AccountData["analysisConfig"];
+    peakTime: AccountData["peakTimeAnalysis"];
 };
 
-export default function BrandAnalysis({ data, config }: Props) {
+export default function BrandAnalysis({ data, config, peakTime }: Props) {
     // Max videos to calculate width percentage
     const maxVideos = Math.max(...data.map((b) => b.videoCount));
 
@@ -81,8 +83,8 @@ export default function BrandAnalysis({ data, config }: Props) {
                                 <div className="w-24 shrink-0 flex items-center justify-start space-x-1">
                                     <span
                                         className={`text-xs ${isHighAvg
-                                                ? "text-yellow-500 font-bold"
-                                                : "text-slate-400 font-medium"
+                                            ? "text-yellow-500 font-bold"
+                                            : "text-slate-400 font-medium"
                                             }`}
                                     >
                                         {item.avgViews} {item.avgViews !== "-" && "avg"}
@@ -95,15 +97,42 @@ export default function BrandAnalysis({ data, config }: Props) {
                 </div>
             </div>
 
-            {/* Info Card Sub-Component */}
-            <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-5 mt-10 w-full shadow-lg">
-                <div className="flex items-center space-x-2 text-cyan-400 text-xs font-bold tracking-widest uppercase mb-3">
-                    <span>👀</span>
-                    <span>Nhìn Này</span>
+            <div className="flex flex-col w-full gap-4 mt-10">
+                {/* Info Card Sub-Component */}
+                <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-5 shadow-lg">
+                    <div className="flex items-center space-x-2 text-cyan-400 text-xs font-bold tracking-widest uppercase mb-3">
+                        <span>👀</span>
+                        <span>Nhìn Này</span>
+                    </div>
+                    <p className="text-sm text-slate-300 leading-relaxed font-light whitespace-pre-wrap">
+                        {config.description}
+                    </p>
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed font-light whitespace-pre-wrap">
-                    {config.description}
-                </p>
+
+                {/* Peak Time Viewing Card */}
+                <div className="bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border border-purple-500/30 rounded-xl p-5 shadow-[0_0_15px_rgba(168,85,247,0.15)] relative overflow-hidden group">
+                    {/* Decorative glow inside card */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-2xl rounded-full translate-x-1/2 -translate-y-1/2 group-hover:bg-purple-500/20 transition-colors duration-500" />
+
+                    <div className="flex items-center space-x-2 text-purple-400 text-xs font-bold tracking-widest uppercase mb-4 relative z-10">
+                        <Clock className="w-4 h-4" />
+                        <span>Giờ Vàng Đăng Bài</span>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 relative z-10">
+                        <div>
+                            <div className="text-3xl font-black text-white tracking-tighter drop-shadow-sm">
+                                {peakTime.bestHour}
+                            </div>
+                            <div className="text-xs font-medium text-purple-300 mt-1 uppercase tracking-wider">
+                                Đỉnh điểm tương tác ~ {peakTime.avgViewsInPeak} view
+                            </div>
+                        </div>
+                        <p className="text-sm text-slate-300 leading-relaxed font-light sm:max-w-[220px]">
+                            {peakTime.insight}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     );
