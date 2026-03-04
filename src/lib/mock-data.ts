@@ -34,6 +34,11 @@ export type AccountData = {
         hasCrown: boolean;
         tags: string[];
         date: string;
+        viralLogic?: {
+            growth24h: string;
+            retentionRate: string;
+            keyHook: string;
+        };
     }[];
 };
 
@@ -82,6 +87,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: false,
                 tags: ["STORYTELLING"],
                 date: "01/08/2025",
+                viralLogic: {
+                    growth24h: "+1.2M",
+                    retentionRate: "68%",
+                    keyHook: "Sự kiện / Tiếc nuối"
+                }
             },
             {
                 id: "02",
@@ -93,6 +103,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: false,
                 tags: ["LIFESTYLE"],
                 date: "18/09/2025",
+                viralLogic: {
+                    growth24h: "+800K",
+                    retentionRate: "55%",
+                    keyHook: "Hài hước / Bắt trend"
+                }
             },
             {
                 id: "03",
@@ -104,6 +119,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: false,
                 tags: ["DRAMA"],
                 date: "06/11/2025",
+                viralLogic: {
+                    growth24h: "+1.5M",
+                    retentionRate: "72%",
+                    keyHook: "Gây tranh cãi"
+                }
             },
             {
                 id: "04",
@@ -115,6 +135,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: true,
                 tags: ["SPONSORED"],
                 date: "04/08/2025",
+                viralLogic: {
+                    growth24h: "+600K",
+                    retentionRate: "45%",
+                    keyHook: "Review chuyên sâu"
+                }
             },
             {
                 id: "05",
@@ -126,6 +151,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: false,
                 tags: ["PHẢN BIỆN"],
                 date: "31/10/2025",
+                viralLogic: {
+                    growth24h: "+900K",
+                    retentionRate: "60%",
+                    keyHook: "Góc nhìn trái chiều"
+                }
             },
         ],
     },
@@ -170,6 +200,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: true,
                 tags: ["LIFESTYLE"],
                 date: "27/05/2025",
+                viralLogic: {
+                    growth24h: "+25.4K",
+                    retentionRate: "78%",
+                    keyHook: "Tò mò / Shock văn hóa"
+                }
             },
             {
                 id: "02",
@@ -181,6 +216,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: false,
                 tags: ["LIFESTYLE"],
                 date: "08/03/2025",
+                viralLogic: {
+                    growth24h: "+3.2K",
+                    retentionRate: "52%",
+                    keyHook: "Âm thanh trending"
+                }
             },
             {
                 id: "03",
@@ -192,6 +232,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: false,
                 tags: ["STORYTELLING"],
                 date: "19/03/2025",
+                viralLogic: {
+                    growth24h: "+400",
+                    retentionRate: "45%",
+                    keyHook: "Giật tít / Đồng cảm"
+                }
             },
             {
                 id: "04",
@@ -203,6 +248,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: false,
                 tags: ["STORYTELLING"],
                 date: "14/03/2025",
+                viralLogic: {
+                    growth24h: "+350",
+                    retentionRate: "40%",
+                    keyHook: "Cảm xúc / Nhớ nhà"
+                }
             },
             {
                 id: "05",
@@ -214,6 +264,11 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
                 hasCrown: false,
                 tags: ["LIFESTYLE"],
                 date: "28/02/2025",
+                viralLogic: {
+                    growth24h: "+280",
+                    retentionRate: "38%",
+                    keyHook: "Hài hước gia đình"
+                }
             },
         ],
     }
