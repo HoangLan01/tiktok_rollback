@@ -5,6 +5,7 @@ import HeroStats from "@/components/HeroStats";
 import BrandAnalysis from "@/components/BrandAnalysis";
 import TopVideos from "@/components/TopVideos";
 import TikTokSearch from "@/components/TikTokSearch";
+import Insights from "@/components/Insights";
 import { accountsData } from "@/lib/mock-data";
 
 export default function Home() {
@@ -75,17 +76,28 @@ export default function Home() {
           {/* Tags (Red/Drama & Blue/Sponsored) */}
           <div className="absolute bottom-[15%] right-[15%] w-[350px] h-[350px] bg-blue-500/15 blur-[100px]" />
         </div>
+
+        {/* Glow for Insights */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-1000 ${activeTab === "insights" ? "opacity-100" : "opacity-0"
+            }`}
+        >
+          {/* Center Title Glow (Emerald/Teal) */}
+          <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[500px] h-[400px] bg-emerald-500/20 blur-[120px]" />
+          {/* Bottom/Left (Green/Teal for Green Zones) */}
+          <div className="absolute bottom-[15%] left-[10%] w-[400px] h-[400px] bg-teal-500/15 blur-[100px]" />
+        </div>
       </div>
 
       {/* Search Bar */}
       <TikTokSearch onSearch={handleSearch} />
 
       {/* Navigation Tabs */}
-      <nav className="w-full max-w-xl mx-auto flex justify-center space-x-2 mt-4 z-10 sticky top-4">
-        <div className="bg-[#1e1e1e]/80 backdrop-blur-md rounded-full p-1.5 flex shadow-xl border border-white/5">
+      <nav className="w-full max-w-2xl mx-auto flex justify-center space-x-2 mt-4 z-10 sticky top-4 px-4 overflow-x-auto no-scrollbar pb-2">
+        <div className="bg-[#1e1e1e]/80 backdrop-blur-md rounded-full p-1.5 flex shadow-xl border border-white/5 whitespace-nowrap">
           <button
             onClick={() => setActiveTab("home")}
-            className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeTab === "home"
+            className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 ${activeTab === "home"
               ? "bg-gradient-to-r from-orange-500 to-green-500 text-white shadow-md"
               : "text-slate-400 hover:text-white"
               }`}
@@ -94,7 +106,7 @@ export default function Home() {
           </button>
           <button
             onClick={() => setActiveTab("dashboard")}
-            className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeTab === "dashboard"
+            className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 ${activeTab === "dashboard"
               ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-md"
               : "text-slate-400 hover:text-white"
               }`}
@@ -103,12 +115,21 @@ export default function Home() {
           </button>
           <button
             onClick={() => setActiveTab("hall_of_fame")}
-            className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeTab === "hall_of_fame"
+            className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 ${activeTab === "hall_of_fame"
               ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md"
               : "text-slate-400 hover:text-white"
               }`}
           >
             Hall of Fame
+          </button>
+          <button
+            onClick={() => setActiveTab("insights")}
+            className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 flex items-center gap-1.5 ${activeTab === "insights"
+              ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md"
+              : "text-slate-400 hover:text-white"
+              }`}
+          >
+            ✨ Tips for 2026
           </button>
         </div>
       </nav>
@@ -118,6 +139,7 @@ export default function Home() {
         {activeTab === "home" && <HeroStats stats={currentData.channelStats} />}
         {activeTab === "dashboard" && <BrandAnalysis data={currentData.brandAnalysis} config={currentData.analysisConfig} peakTime={currentData.peakTimeAnalysis} />}
         {activeTab === "hall_of_fame" && <TopVideos videos={currentData.topVideos} />}
+        {activeTab === "insights" && <Insights data={currentData.insights} />}
       </div>
     </main>
   );
