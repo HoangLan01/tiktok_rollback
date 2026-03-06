@@ -24,6 +24,15 @@ export type AccountData = {
         avgViewsInPeak: string;
         insight: string;
     };
+    insights: {
+        futureTip: string;
+        greenZones: {
+            topic: string;
+            videoCount: number;
+            avgEngagement: string;
+            potentialGrowth: string;
+        }[];
+    };
     topVideos: {
         id: string;
         title: string;
@@ -75,6 +84,29 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
             bestHour: "20:00 - 21:00",
             avgViewsInPeak: "1.2M",
             insight: "Đăng tải video vào khung giờ tối cuối tuần (thứ 7, CN) giúp đẩy luồng traffic xe cộ lên đỉnh điểm. Video đăng lúc 20h thường có khả năng viral (lên xu hướng) cao gấp 2.5 lần."
+        },
+        insights: {
+            futureTip: "Dựa trên dữ liệu 12 tháng qua, nếu bạn tăng gấp đôi lượng video về hãng Lynk & Co và đánh giá các tính năng 'gây tranh cãi', tổng lượt xem toàn kênh có thể tăng trưởng 45% trong năm 2026.",
+            greenZones: [
+                {
+                    topic: "Review xe nội địa",
+                    videoCount: 8,
+                    avgEngagement: "410K",
+                    potentialGrowth: "+85%"
+                },
+                {
+                    topic: "Tin tức Đăng kiểm",
+                    videoCount: 3,
+                    avgEngagement: "850K",
+                    potentialGrowth: "+120%"
+                },
+                {
+                    topic: "Lái thử xe sang cũ",
+                    videoCount: 5,
+                    avgEngagement: "220K",
+                    potentialGrowth: "+50%"
+                }
+            ]
         },
         topVideos: [
             {
@@ -188,6 +220,29 @@ Audi với 17 video cũng ấn tượng: 195K avg. Những thương hiệu "gây
             bestHour: "10:00 - 11:00",
             avgViewsInPeak: "21.1K",
             insight: "Video có view cao nhất (41.3K) được đăng vào lúc 10:58 sáng. Các video đăng vào khung giờ trưa (12:00 - 13:00) hoặc sáng có xu hướng thu hút lượng view tự nhiên tốt hơn."
+        },
+        insights: {
+            futureTip: "Chủ đề #lifestyle về cuộc sống du học sinh tại Anh (UK) đang là mỏ vàng chưa được khai thác. Việc kết hợp âm thanh trending vào dạng vlog hàng ngày có thể giúp bạn đạt mốc 100K views dễ dàng.",
+            greenZones: [
+                {
+                    topic: "So sánh giá cả UK vs VN",
+                    videoCount: 1,
+                    avgEngagement: "41K",
+                    potentialGrowth: "+300%"
+                },
+                {
+                    topic: "Shock văn hóa đời sống",
+                    videoCount: 2,
+                    avgEngagement: "14K",
+                    potentialGrowth: "+150%"
+                },
+                {
+                    topic: "Đánh giá đồ ăn siêu thị",
+                    videoCount: 0,
+                    avgEngagement: "0",
+                    potentialGrowth: "Tiềm năng mới"
+                }
+            ]
         },
         topVideos: [
             {
