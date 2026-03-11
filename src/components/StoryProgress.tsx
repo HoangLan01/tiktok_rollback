@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback } from "react";
-import { X, Pause, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { X, Pause, Play, ChevronLeft, ChevronRight, Volume2, VolumeX, Disc3 } from "lucide-react";
 
 type Props = {
   tabs: string[];
@@ -20,6 +20,9 @@ export default function StoryProgress({
 }: Props) {
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleNext = useCallback(() => {
     if (activeTabIndex < tabs.length - 1) {
@@ -35,6 +38,30 @@ export default function StoryProgress({
     }
   }, [activeTabIndex, onNextSlide]);
 
+  // Audio Play/Pause Sync
+  useEffect(() => {
+    if (audioRef.current) {
+        if (isPaused) {
+            audioRef.current.pause();
+        } else {
+            // Attempt to play, catch potential autoplay restriction errors safely
+            const playPromise = audioRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    console.log("Audio autoplay prevented by browser. User interaction needed.");
+                });
+            }
+        }
+    }
+  }, [isPaused]);
+
+  // Audio Mute Sync
+  useEffect(() => {
+    if (audioRef.current) {
+        audioRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -46,6 +73,8 @@ export default function StoryProgress({
         setIsPaused(p => !p);
       } else if (e.key === "Escape") {
         onClose();
+      } else if (e.key.toLowerCase() === "m") {
+        setIsMuted(m => !m);
       }
     };
 
@@ -79,6 +108,10 @@ export default function StoryProgress({
 
   return (
     <div className="fixed inset-0 z-50 pointer-events-none flex flex-col items-center justify-between">
+      
+      {/* Hidden Audio Element */}
+      <audio ref={audioRef} src="/bgm.mp3" loop preload="auto" />
+
       {/* Top Bar with Progress Indicators */}
       <div className="w-full max-w-2xl mx-auto px-4 pt-4 flex items-center space-x-1 pointer-events-auto">
         {tabs.map((_, idx) => {
@@ -97,8 +130,15 @@ export default function StoryProgress({
         })}
       </div>
 
-      {/* Close & Pause Controls */}
+      {/* Close & Player Controls (Top Right) */}
       <div className="absolute top-8 right-4 flex items-center space-x-3 pointer-events-auto">
+        <button
+          onClick={() => setIsMuted(!isMuted)}
+          className="p-2 bg-black/40 backdrop-blur-md text-white rounded-full hover:bg-black/60 transition"
+          title="Tật/Bật âm thanh (Phím M)"
+        >
+          {isMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4" />}
+        </button>
         <button
           onClick={() => setIsPaused(!isPaused)}
           className="p-2 bg-black/40 backdrop-blur-md text-white rounded-full hover:bg-black/60 transition"
@@ -115,8 +155,36 @@ export default function StoryProgress({
         </button>
       </div>
 
+      {/* Vinyl Record Banner (Bottom Left) */}
+      <div className="absolute bottom-6 left-6 pointer-events-auto flex items-center space-x-3 bg-black/40 backdrop-blur-[8px] pl-2 pr-4 py-2 rounded-full border border-white/5 shadow-2xl">
+        <div className="relative w-10 h-10 rounded-full bg-[#111] border-2 border-[#222] flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(0,0,0,0.8)]">
+            {/* The Vinyl grooved texture */}
+            <div className={`absolute inset-0 rounded-full border border-white/10 ${!isPaused ? 'animate-spin' : ''}`} style={{ animationDuration: '3s' }}>
+                 <div className="absolute inset-[2px] rounded-full border border-white/5"></div>
+                 <div className="absolute inset-[4px] rounded-full border border-white/5"></div>
+                 <div className="absolute inset-[6px] rounded-full border border-white/5"></div>
+            </div>
+            {/* Center Label Custom Art (Generic Gradient) */}
+            <div className={`w-4 h-4 rounded-full bg-gradient-to-tr from-rose-500 to-indigo-500 z-10 ${!isPaused ? 'animate-spin' : ''}`} style={{ animationDuration: '3s' }}>
+                {/* Spindle block */}
+                <div className="absolute inset-0 m-auto w-1 h-1 bg-black rounded-full"></div>
+            </div>
+            <Disc3 className="w-full h-full text-white/5 absolute p-1 pointer-events-none" />
+        </div>
+        
+        {/* Song Info Marquee */}
+        <div className="flex flex-col max-w-[120px] overflow-hidden">
+            <div className="flex w-max shrink-0">
+                <span className={`text-[11px] font-bold text-white uppercase tracking-wider ${!isPaused ? 'animate-[marquee_6s_linear_infinite]' : ''}`}>
+                    Chill Vibes - 2026 Soundtrack &nbsp;&nbsp;&nbsp;&nbsp; Chill Vibes - 2026 Soundtrack
+                </span>
+            </div>
+            <span className="text-[9px] text-slate-400 truncate">Original Audio</span>
+        </div>
+      </div>
+
       {/* Invisible clickable areas for manual navigation & Visible Navigation Buttons */}
-      <div className="absolute inset-0 top-20 pointer-events-auto flex items-center">
+      <div className="absolute inset-x-0 top-20 bottom-24 pointer-events-auto flex items-stretch">
         {/* Left Side: Go Back */}
         <div
           className="w-1/4 h-full cursor-w-resize group flex items-center justify-start pl-4 sm:pl-8"
