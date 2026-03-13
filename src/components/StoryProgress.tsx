@@ -96,7 +96,9 @@ export default function StoryProgress({
         const next = prev + increment;
         if (next >= 100) {
           clearInterval(timer);
-          handleNext();
+          // Use setTimeout to avoid updating parent component (Home) state
+          // synchronously during the child component (StoryProgress) render phase
+          setTimeout(() => handleNext(), 0);
           return 100;
         }
         return next;
