@@ -7,11 +7,12 @@ import TopVideos from "@/components/TopVideos";
 import TikTokSearch from "@/components/TikTokSearch";
 import Insights from "@/components/Insights";
 import StoryProgress from "@/components/StoryProgress";
+import AccountComparison from "@/components/AccountComparison";
 import { accountsData } from "@/lib/mock-data";
 import { PlayCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const TAB_ORDER = ["home", "dashboard", "hall_of_fame", "insights"];
+const TAB_ORDER = ["home", "dashboard", "hall_of_fame", "insights", "compare"];
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
@@ -111,6 +112,16 @@ export default function Home() {
           {/* Bottom/Left (Green/Teal for Green Zones) */}
           <div className="absolute bottom-[15%] left-[10%] w-[400px] h-[400px] bg-teal-500/15 blur-[100px]" />
         </div>
+
+        {/* Glow for Compare */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            activeTab === "compare" ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <div className="absolute top-[20%] left-[20%] w-[500px] h-[400px] bg-rose-500/15 blur-[120px]" />
+          <div className="absolute top-[20%] right-[20%] w-[500px] h-[400px] bg-blue-500/15 blur-[120px]" />
+        </div>
       </div>
 
       {/* Story Mode UI */}
@@ -151,7 +162,7 @@ export default function Home() {
               <TikTokSearch onSearch={handleSearch} />
 
               {/* Navigation Tabs */}
-              <nav className="w-full max-w-2xl mx-auto flex justify-center space-x-2 mt-4 px-4 overflow-x-auto no-scrollbar pb-2">
+              <nav className="w-full max-w-4xl mx-auto flex justify-center space-x-2 mt-4 px-4 overflow-x-auto no-scrollbar pb-2">
                 <div className="bg-[#1e1e1e]/80 backdrop-blur-md rounded-full p-1.5 flex shadow-xl border border-white/5 whitespace-nowrap">
                   <button
                     onClick={() => setActiveTab("home")}
@@ -189,6 +200,15 @@ export default function Home() {
                   >
                     ✨ Tips for 2026
                   </button>
+                  <button
+                    onClick={() => setActiveTab("compare")}
+                    className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 flex items-center gap-1.5 ${activeTab === "compare"
+                      ? "bg-gradient-to-r from-rose-500 to-indigo-500 text-white shadow-md"
+                      : "text-slate-400 hover:text-white"
+                      }`}
+                  >
+                    ⚔️ Compare
+                  </button>
                 </div>
               </nav>
             </div>
@@ -210,6 +230,7 @@ export default function Home() {
           {activeTab === "dashboard" && <BrandAnalysis data={currentData.brandAnalysis} config={currentData.analysisConfig} peakTime={currentData.peakTimeAnalysis} />}
           {activeTab === "hall_of_fame" && <TopVideos videos={currentData.topVideos} />}
           {activeTab === "insights" && <Insights data={currentData.insights} />}
+          {activeTab === "compare" && <AccountComparison account1Data={accountsData.vietchop} account1Name="VietChop" account2Data={accountsData.blossominn} account2Name="Blossominn" />}
         </motion.div>
       </AnimatePresence>
     </main>
